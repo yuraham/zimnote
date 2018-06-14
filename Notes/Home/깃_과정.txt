@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-06-14T15:43:49+09:00
+
+====== 깃 과정 ======
+Created 목요일 14 6월 2018
+
+git 다운로드
+git hub에 회원가입
+git을 설치할 해당 폴더에 가서 우클릭 > git bash here 클릭
+git bash창이 열리면 'git init' 입력, git 초기화.
+ls -al의 git, 경로 적힌 부분 옆에 (master)가 있는지 확인해보기
+'git add --all ' 입력, 변경된 내용을 추가해주고 'git commit -m "커밋 에 넣을 할 말"'으로 커밋한다.
+'git status'로 확인해본다.
