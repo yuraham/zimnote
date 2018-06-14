@@ -11,5 +11,7 @@ git을 설치할 해당 폴더에 가서 우클릭 > git bash here 클릭
 git bash창이 열리면 'git init' 입력, git 초기화.
 이름/이메일 넣기(git config --global user.email "email@example.com" / git config --global username "Your name")
 ls -al의 git, 경로 적힌 부분 옆에 (master)가 있는지 확인해보기
+'git remote add origin https://github.com/yuraham/zimnote.git' 입력!
 'git add --all ' 입력, 변경된 내용을 추가해주고 'git commit -m "커밋 에 넣을 할 말"'으로 커밋한다.
 'git status'로 확인해본다.
+마지막으로 'git push'로 서버에 넣어준다.
