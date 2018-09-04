@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-04T13:51:32+09:00
+
+====== 취미 ======
+Created 화요일 04 9월 2018
+
+아이패드 개발환경 가능한지 확인해보기
+
