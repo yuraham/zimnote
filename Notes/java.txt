@@ -74,3 +74,14 @@ http://www.eclipse.org/downloads/
 		  실행 Alt+Shift+x
 		  힌트 ctrl + space
 
+
+===== 인텔리전트아이디어 =====
+젯브레인사의 java tool. 이클립스보단 가볍지만 비싸다.
+
+
+===== 작명규칙 =====
+for classes : HelloWorld
+for variables : helloWorld
+for methods : helloWorld
+for package/project : helloworld
+for constants : HELLO_WORLD
