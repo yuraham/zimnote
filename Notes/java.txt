@@ -73,6 +73,9 @@ http://www.eclipse.org/downloads/
 		=재실행 ctrl + F11
 		  실행 Alt+Shift+x
 		  힌트 ctrl + space
+		  이하 단축키 항목 참고
+	-멤버변수(객체변수) 작성 후 set이나 get항목을 이용할 때의 이클립스
+		=소스 > Generate Getters and Setters > 변수명 클릭 > Getters 나 Setters 선택 > Generate
 
 
 ===== 인텔리전트아이디어 =====

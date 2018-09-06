@@ -1,0 +1,194 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-06T10:05:25+09:00
+
+====== 20180906 ======
+Created 목요일 06 9월 2018
+
+
+===== 메소드 =====
+1. 자바는 클래스를 떠나 존재하는 것은 있을 수 없기 때문에 함수가 별도로 존재하지 않는다.
+2. 입력을 가지고 어떤일을 수행한 다음 결과물을 내놓는 것.
+	-입력값 > 메소드(블랙박스:내용을 모른다는 것) > 출력값 이
+3. 메소드를 사용하는 이유 : 재사용
+	-여러번 반복해서 사용된다는 것은 언제고 또다시 사용할만한 가치가 있는 부분이라는 뜻.
+4. 구조
+	-pyblic 리턴자료형 메소드명(입력자료형1 입력변수, 입력자료형2 입력변수) {
+		...
+		return 리턴값;  //void는 필요없다.
+	}
+	-입출력 유무에 따른 분류
+	입력과 출력이 모두 있는 메소드
+		=리턴값받을변수 = 객체.메소드명(입력인수1, 입력인수2, ...)
+	입력은 없고 출력은 있는 메소드
+		=리턴값받을변수 = 객체.메소드명()
+	입력은 있고 출력은 없는 메소드
+		=객체.메소드명(입력인수1, 입력인수2, ...)
+	입력과 출력이 모두 없는 메소드
+		=객체.메소드명()
+5. return : 메소드를 빠져나가기를 원할 때 return만 단독으로 써서 메소드를 즉시 빠져나갈 수 있다.
+	-리턴자료형이 void형인 메소드에만 해당(그 외에는 오류)
+6. 스코프 : 메소드 내에서 선언된 변수의 효력 범위
+	-로컬변수
+		=메소드 내에서 사용되는 변수는 메소드 안에서만 쓰여지는 변수
+			class Test {
+				public void vartest(int a) {
+					a++;  //a를 받긴 했지만 내보내지 못하고 그대로 사라진다.
+				}
+				public static void main(String[] args) {
+					int a = 1;
+					Test myTest = new Test();
+					myTest.vartest(a);
+					System.out.println(a);
+				}
+			}
+			// 값을 받으려면 return을 vartest에 넣어주고(void가 아닌 int로 변경) myTest.vartest(a)를 변수에 담아 print해야한다.
+			
+			public class Test {
+				int a; //처음에 a라는 걸 만드는 역할. myTest 객체를 만들 때 속에 a메모리의 자리를 만들어주는 역할을 한다. myTest.a가 아닌 a는 null??
+				public void vartest(Test test) {
+					test.a++;
+				}
+				//this.a++로 쓸 경우 vartest(Test test)를 vartest()로 변경한다.
+				public static void main(String[] args) {
+					Test myTest = new Test();
+					myTest.a = 1;
+					myTest.vartest(myTest);  //객체 자체(참조주소)를 전달
+					System.out.println(myTest.a);
+				}
+			}
+			// 혹은 class의 객체변수를 만들어준다.
+		=메소드에서 쓰이는 변수는 메소드 밖의 변수이름들과는 전혀 상관 없다.
+	-입력값이 int 자료형이 아닌 객체였다면 
+		=메소드가 객체의 속성값(객체변수 값)을 변경한다면 메소드 수행 이후에도 객체는 변경된 속성값을 유지
+		=메소드에 전달하는 입력 자료형의 형태 때문
+
+
+===== Call by value =====
+1. class Updater {
+	 public void update(int count) {
+			count++;  //return이 없어 버려진다.
+		}
+	}
+	public class Counter {
+		int count = 0;  // 객체변수
+		public static void main(String[] args) {        
+			Counter myCounter = new Counter();        
+			System.out.println("before update:"+myCounter.count);
+			Updater myUpdater = new Updater();
+			myUpdater.update(myCounter.count);  //값(프리미티브데이터)를 전달
+			System.out.println("after update:"+myCounter.count);
+		}
+	}
+	// before update:0
+	// after update:0
+
+
+===== 상속 =====
+1. 자식이 부모로부터 무언가를 물려받는 것.
+	-class의 인스턴스가 무언가를 처리하게끔 하는것이 목표
+	-추상적 개념의 구체화가 필요하다.
+		=ex) 선풍기인데 프로펠러형 선풍기
+		=java의 구체화 : extends
+2. 자식클래스 extends 부모클래스
+	- Animal.java
+	public class Animal {
+		String name;
+		public void setName(String name) {
+			this.name = name;
+		}
+	}
+	-Dog.java
+	public class Dog extends Animal {
+	}
+	-포함관계를 java에서 언어로 표현할 때 extends 사용.
+	-자식클래스 : 고유의 메소드와 속성+ 부모의 메소드와 속성 모두 가지고 있다.
+3. IS-A관계
+	-"Dog is a Animal"과 같이 말할 수 있는 관계. = 상속관계 / 포함관계
+	-자식객체는 부모클래스의 자료형인 것처럼 사용할 수 있다.
+		=Dog dog = new Dog();  //개로 만든 객체는 개 자료형이다.
+		=Animal dog = new Dog();  //개로 만든 객체는 동물 자료형이다.
+		=Object animal = new Animal();  //Object는 모든 클래스의 부모관계에 있어 가능.
+		=Object dog = new Dog();	
+		=아래와 같은 형식은 불가하다.
+			Dog dog = new Animal();
+4. 메소드 오버라이딩(Method overriding)
+	-부모클래스의 메소드를 자식클래스가 "동일한 데이터 타입, 동일한 형태"로 또다시 구현하는 행위
+	-메소드 덮어쓰기
+5. 메소드 오버로딩(Method overloading)
+	-동일한 이름의 "다른 데이터 타입, 다른 형태"로 메소드를 구현하는 행위
+	-변경이 아닌 추가(아래에 있는 함수일수록 오버로딩된다.)
+6. 자바는 다중상속을 지원하지 않는다.
+
+
+===== super =====
+1. 부모 클래스 인스턴스 변수를 즉시 참조 할 때 사용.
+	-슈퍼 키워드가 없을 때
+		=class Vehicl {
+			int speed=50;
+		}
+
+		=class Bike3 extends Vehicle{
+			int speed = 100;
+			void display() {
+				 System.out.println(speed)  //바이크의 속도가 출력
+			}
+			public static void main(String[] args) {
+				Bike3 b=new Bike2();
+				b.display();
+			}
+	-Vehicl과 Bike는 속도에 대한 공동의 속성을 가지므로 부모 클래스 인스턴스 변수와 현재 클래스 인스턴스 변수 사이를 구분하기 위해 사용.
+	-슈퍼 키워드가 있을 때
+		=class Vehicle {
+			int speed=50;
+		}
+		
+		=class Bike4 extends Vehicle {
+			int speed=100;
+			
+			void display() {
+				System.out.println(super.speed);
+			}
+			public static void main(String[] args) {
+			Bike4 b=new Bike4();
+			b.display();
+			}
+		}
+2. super()는 부모 클래스 생성자를 즉시 호출할 때 사용.
+	-class Vehicle{
+		Vehicle(){
+			System.out.println("Vehicle is created");
+		}
+	}
+	-class Bike extends Vehicle{
+		Bike() {
+			super();  //부모 클래스 생성자가 호출
+			System.out.println("Bike is created");
+		}
+		public static void main(String[] args) {
+			Bikd = new Bike();
+		}
+	}
+	-컴파일러에 의해 super()는 자동으로 각 클래스 생성자에 추가.
+3. super는 부모 클래스 메소드를 호출할 때 사용.
+	-서브클래스가 부모클래스만큼 동일한 메소드를 포함하는 경우 사용.
+	-class Person{
+		void message() {
+			System.out.println("welcome");
+		}
+	}
+	-class Student extends Person {
+		void message() {
+			System.out.println("welcome to java");
+		}
+		void display() {
+			message();  //현재 클래스 메세지() 메소드가 호출 됨 
+			super.message();  //부모 클래스 메세지() 메소드가 호출 됨
+		}
+		public static void main(String[] args);{
+			Student s=new Student();
+			s.display();
+		}
+	}
+	-서브 클래스에 메소드가 없는 경우, super를 사용할 필요가 없다.
+
