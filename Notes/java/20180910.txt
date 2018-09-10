@@ -1,0 +1,62 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-10T10:00:25+09:00
+
+====== 20180910 ======
+Created 월요일 10 9월 2018
+
+
+===== 인터페이스 =====
+1. 기능을 구현하는데 사용.
+2. 상속의 부족한 점을 보완하는 데 사용.
+3. public interface Predator {
+	}
+	-인터페이스를 상속 받을 땐 implement Predator를 추가해준다.
+		=public class Tiger extends Animal(상속) implement Predator(인터페이스)
+4. 기능에 대한 포함관계를 가진다.
+	-Predator > lion, tiger 상속
+	-public void feed(Predator predator) {
+		System.out.println("feed apple");
+	}
+	-zooKeeper.feed(tiger);
+	 zooKeeper.feed(lion);           >둘다 feed apple이 나온다.
+5. 다형성 : 한개 이상의 자료형 타입을 갖게되는 특성
+	-tiger > Tige와 Predater의 객체.
+6. 매서드
+	-이름(); 몸체{}가 없다.
+	-상속받는 클래스에서 반드시 구현해야한다.
+	-오버라이드 하기 전까지 똑같은 기능을 가지는 생성자와 차이
+	-Animal dog = new Dog()처럼 매개변수에 모두의 공통적인 기능을 구현한 인터페이스를 매개변수로 사용.
+7. 왜 인터페이스가 필요한가?
+	-클래스가 동물들의 종류에 의존적인 클래스에서 동물들의 종류와 상관없는 "독립적인 클래스"가 되었다는 점이다.
+	-USB포트의 규격만 알면 어떤 기기도 만들 수 있다. 또 컴퓨터는 USB 포트만 제공하고 어떤 기기가 만들어지는 지 신경쓸 필요가 없다. 바로 이 점이 인터페이스의 핵심이다.
+		=USB포트에는 전자기기들이 지켜야만 하는 각종 규칙들이 있다.(인터페이스의 메소드)
+8. 인터페이스가 상속받을 땐 하나 이상을 받을 수 있다.
+
+
+===== 다형성 =====
+1. 폴리모피즘(Polymorphism)
+2. 한개 이상의 자료형 타입을 갖게되는 특성.
+3. 만약 두개의 인터페이스에서 받는 각각의 메소드를 모두 사용하고 싶다면?
+	-새로운 인터페이스를 작성한다.
+		=public interface BarkablePredator  {
+			public void bark();
+			public String getFood();
+		}
+		=public interface BarkablePredator extends Predator, Barkable {
+		}
+4. if else의 조건문을 간단하게 처리할 수 있는 경우가 많다.
+
+
+===== 추상클래스 =====
+1. 추상화와는 다르다.
+2. 인터페이스의 역할도 하며 구현체의 역할도 가지고 있다.
+3. class 앞에 abstract
+4. 인스턴스를 만들 수 없다.
+5. 하나 이상의 추상메서드를 가진다.
+	-메서드 역할을 하는 메서드에도 역시 abstract를 붙인다.
+	-추상메서드는 인터페이스 메소드처럼 몸통이 없다.
+	-반드시 구현해야한다.
+6. 일반 메소드를 가질 수 있다.
+	-일반 메소드는 그냥 상속이 된다.
+7. 상속할 때 extands 사용. 
