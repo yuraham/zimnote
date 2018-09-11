@@ -1,0 +1,108 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-11T10:00:58+09:00
+
+====== 20180911 ======
+Created 화요일 11 9월 2018
+
+===== 패키지 =====
+1. pakage 키워드 사용
+2. src.java.house > 패키지
+	src.java.house.ch01 > 서브패키지
+3. 다른 클래스에서 a클래스를 사용하려면 import.
+	-import src.java.house.a;
+	-import src.java.*;
+		=모든 클래스를 다 불러오는 명령어
+
+
+===== 접근제어자 =====
+1. 더 큰 접근 : private < default < protected < public
+2. 접근 범위 : 클래스 내부 < 패키지 내부 < 패키지 내 또는 상속받은 클래스 < 어디서나 접근
+3. 제어자
+	-파리이빗 : 클래스 내부. 메소드명은 프라이빗x, 보통 변수는 보호하기 위해 피라이빗 사용.
+	-디폴트 : 패키지 내부. 아무것도 지정하지 않을 때.
+	-프로텍티드 : 패키지 내 또는 상속받은 클래스. 폴더단위인데 상속받은 내용은 가져다 쓸 수 있다.
+
+
+===== 정적변수와 메소드 =====
+1. static변수
+	-변하지 않는 값에 static
+	-메모리 할당을 딱 한번만 하게된다. > 메모리 사용에 이점이 됨
+	-공유가 된다.(계산기 할때 많이 사용/자바스크립트에서의 전역변수?)
+	-public class Counter  {
+		static int count = 0;
+		Counter() {  //생성자
+			this.count++;
+			System.out.println(this.count);
+		}
+	
+		public static void main(String[] args) {
+			Counter c1 = new Counter();
+			Counter c2 = new Counter();
+		}
+	}
+		=결과: 1, 2
+2. static메소드
+	-유틸리티성 메소드를 작성할 때 많이 사용
+	-스태틱 메소드 안에서는 인스턴스 변수접근 불가.
+3. 싱글톤 패턴(Singleton pattern)
+	-단 하나의 객체만을 생성하도록 강제.
+	-new로 만들 수 없다.(에러) = private
+	-class singleton {
+		private static singleton one;  //이곳에서 선언, 처음 작성시 one은 null상태.
+		private singleton() {
+			public static singleton getInstance() {
+				if(one == null) {  //만일 처음 작성하는 거라면
+					one = new singleton();  //싱글톤을 만들고
+				}
+			}
+			return one;  //아니라면 원래의 원 객체의 참조값을 전해준다.
+		}
+	}
+	-Thread Safe하지는 않다. 쓰레드 환경에서도 안전한 싱글톤을 만드는 방법은 생략.(따로 알아봐야 할듯)
+
+
+===== 콘솔입출력 =====
+1. 받는 값이 무엇인가에 따라 달라진다.
+2. 고정크기
+	=1byte(=8it/아스키코드 > 256가지의 경우 저장가능)
+	=3byte
+3. 입력내용 전부
+4. inputStream
+	-글자 여러개를 입력해도 하나만 나온다.(1byte만 읽음)
+	-a 입력 > 01100001(> 1byte >) > 97입력
+5. stream
+	-문자로 출력(char방식(3byte??))
+6. BufferedReader
+	-입력내용 모두 다 받기
+7. Scanner
+	-가장 많이 쓰이는 것
+	-단어 : next();
+	 정수 : nextInt();
+	 라인 : nextLine();
+
+
+===== 파일입출력 =====
+1. FileOutputStream(경로+이름)
+	-byte배열
+	-반드시! 항상! output.close()를 해줘야 한다.
+		=파일을 닫지 않으면 에러가 날수도 있다.
+	-string을 byte로 바꿔주는 getbyte() 메서드 이용.
+2. FileWriter
+	-문자열 직접작성
+	-FileWriter(주소+이름, true)
+		=true : 없으면 파일을 만들고 있으면 추가하라.
+		=만일 true가 없는데 주소와 이름이 같다면 새로운 파일 내용으로 덮어쓰기.
+3. PrintWriter
+	-화면에 출력될 내용 파일로 저장
+4. 파일읽기
+	-FileInputStream
+		=byte단위
+		=byte[] b = new bye[1024]  //1메가바이트
+		=정확한 길이를 모르면 불편하다.
+	-BufferedReader+FileReader
+		=라인단위
+		=FileReader의 내용을 받아와 라인자체를 출력
+		=위의것보다 많이 쓰인다.
+
+

@@ -88,3 +88,8 @@ for variables : helloWorld
 for methods : helloWorld
 for package/project : helloworld
 for constants : HELLO_WORLD
+
+
+===== 출력관련 =====
+print : 화면출력이나 붙여서 나온다.
+println : 행 바꿔서 출력
